@@ -12,30 +12,35 @@ public class ViewCalculator {
 
     public void run() {
         while (true) {
-            int primaryArg1 = promptInt("Введите первое комплексное число формата a+bi: ");
-            int primaryArg2 = promptInt("Введите второе комплексное число формата a+bi: ");
-            calculator.sum(primaryArg1, primaryArg2);
+            int primaryArg1 = promptInt("Введите первое число первого комплексного числоа формата a + bi : ");
+            int primaryArg2 = promptInt("Введите второе число первого комплексного числоа формата a + bi : ");
+            int primaryArg3 = promptInt("Введите первое число второго комплексного числоа формата a + bi : ");
+            int primaryArg4 = promptInt("Введите второе число второго комплексного числоа формата a + bi : ");
+            Calculator calculator1 = new Calculator(primaryArg1, primaryArg2);
+            Calculator calculator2 = new Calculator(primaryArg3, primaryArg4);
+            
             //iCalculable calculator = calculableFactory.create(primaryArg);
             while (true) {
                 String cmd = prompt("Введите команду (+, *, /, =) : ");
                 if (cmd.equals("*")) {
-                    
-                    calculator.multi(primaryArg1, primaryArg2);
+                    System.out.print("(" + primaryArg1 + " + " + primaryArg2 + "i" + ")" + " * " + "(" + primaryArg3 + " + " + primaryArg4 + "i" + ")" + " = ");
+                    calculator1.multi(calculator2);
                     continue;
                 }
                 if (cmd.equals("+")) {
-                    calculator.sum(primaryArg1, primaryArg2);
+                    System.out.print("(" + primaryArg1 + " + " + primaryArg2 + "i" + ")" + " + " + "(" + primaryArg3 + " + " + primaryArg4 + "i" + ")" + " = ");
+                    calculator1.sum(calculator2);
                     continue;
                 }
                 if (cmd.equals("/")) {
-                    calculator.divide(primaryArg1, primaryArg2);
-                    continue;
-                }
-                if (cmd.equals("=")) {
-                    int result = calculator.getResult();
-                    System.out.printf("Результат %d\n", result);
+                    System.out.print("(" + primaryArg1 + " + " + primaryArg2 + "i" + ")" + " / " + "(" + primaryArg3 + " + " + primaryArg4 + "i" + ")" + " = ");
+                    calculator1.divide(calculator2);
                     break;
                 }
+                // if (cmd.equals("=")) {
+                //     System.out.printf("Результат %d\n", calculator1.getResult(primaryArg1, primaryArg2));
+                //     break;
+                // }
             }
             String cmd = prompt("Еще посчитать (Y/N)?");
             if (cmd.equals("Y")) {

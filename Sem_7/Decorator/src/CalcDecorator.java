@@ -2,6 +2,10 @@ public class CalcDecorator implements iCalculable {
 
     private iCalculable oldCalc;
     private Logger logger;
+
+    private int primaryArg1;
+    private int primaryArg2;
+    Calculator calculator1 = new Calculator(primaryArg1, primaryArg2);
  
     public CalcDecorator(iCalculable oldCalc, Logger logger) {
         this.oldCalc = oldCalc;
@@ -10,11 +14,8 @@ public class CalcDecorator implements iCalculable {
 
     @Override
     public iCalculable sum(Calculator calculator) {
-       int firstArg1 = oldCalc.getResult();
-       int firstArg2 = oldCalc.getResult();
-
-       logger.log(String.format("Первые значения калькулятора %d %d. Начало вызова метода sum с параметрами %d %d", firstArg1, firstArg2));
-       iCalculable result = oldCalc.sum(firstArg1, firstArg2);
+       logger.log(String.format("Первые значения калькулятора %d %d. Начало вызова метода sum с параметрами %d %d", primaryArg1, primaryArg2));
+       iCalculable result = oldCalc.sum(calculator1);
        logger.log(String.format("Вызова метода sum произошел"));
 
        return result;
@@ -22,43 +23,17 @@ public class CalcDecorator implements iCalculable {
 
     @Override
     public iCalculable multi(Calculator calculator) {
-       int firstArg1 = oldCalc.getResult();
-       int firstArg2 = oldCalc.getResult();
-        logger.log(String.format("Первые значения калькулятора %d %d. Начало вызова метода multi с параметрами %d %d", firstArg1, firstArg2));
-        iCalculable result = oldCalc.multi(firstArg1, firstArg2);
+        logger.log(String.format("Первые значения калькулятора %d %d. Начало вызова метода multi с параметрами %d %d", primaryArg1, primaryArg2));
+        iCalculable result = oldCalc.multi(calculator1);
         logger.log(String.format("Вызова метода multi произошел"));
         return result;
     }
 
     @Override
-    public int getResult() {
-        int result = oldCalc.getResult();
-        logger.log(String.format("Получение результата %d", result));
+    public iCalculable divide(Calculator calculator) {
+        logger.log(String.format("Первые значения калькулятора %d %d. Начало вызова метода divide с параметрами %d %d", primaryArg1, primaryArg2));
+        iCalculable result = oldCalc.divide(calculator1);
+        logger.log(String.format("Вызова метода divide произошел"));
         return result;
     }
-
-    @Override
-    public iCalculable divide(Calculator calculator) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'divide'");
-    }
-
-    @Override
-    public iCalculable sum(int primaryArg1, int primaryArg2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sum'");
-    }
-
-    @Override
-    public iCalculable multi(int primaryArg1, int primaryArg2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'multi'");
-    }
-
-    @Override
-    public void divide(int primaryArg1, int primaryArg2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'divide'");
-    }
-    
 }
